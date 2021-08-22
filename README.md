@@ -5,11 +5,11 @@
 ### 3. Spring Boot DevTools.
 ### 4. MySQL Driver.
 
-**Tipo de proyecto: **  Maven Project
-**Lenguaje y version: **  Java version: 11
-**Spring Boot version: **  2.5.4
-**Packaging: **  Jar
-**MySQL 8.0: **
+Tipo de proyecto: **  Maven Project
+Lenguaje y version: **  Java version: 11
+Spring Boot version: **  2.5.4
+Packaging: **  Jar
+MySQL 8.0: **
 
 Base de datos info:  https://github.com/JefryPardo/Bd_Conexion
 
