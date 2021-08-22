@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  
+  <head th:insert="fragments/head :: head"></head>
+
+  <body>
+    <header th:insert="fragments/navbar :: menu-principal"></header>
+
+    <main role="main">     
+      <hr>
+      <div class="container"> 
+        <br><br>
+        <div th:if="${msg != null}" class='alert alert-danger' style="margin-top: 5px;" th:text="${msg}" role='alert'></div>
+        <div class="card">
+          <h4 class="card-header"><strong>Creacion de conexion de red</strong></h4> 
+          
+          <div class="card-body">
+            
+            <!-- Formulario -->
+            <form th:action="@{/conexionRedController/save}" method="post" th:object="${red}" enctype="multipart/form-data">    
+              <input type="hidden" th:field="*{id}">   
+              <div class="row">
+                <!-- Tipo -->
+                <div class="col-md-6"> 
+                    <div class="form-group">
+                      <label for="tipo">Tipo de red</label>
+                      <select class="form-control" th:field="*{tipo}"  name="tipo" id="tipo">
+                          <option value="1">Wifi</option>
+                          <option value="2">LAN</option>	
+                      </select>
+                    </div>
+                </div>
+
+                <!-- Nombre -->
+                <div class="col-md-6"> 
+                    <div class="form-group">
+                      <label for="nombre_red">Nombre de la red</label>
+                      <input type="text" th:field="*{nombre_red}" class="form-control" name="nombre_red" id="nombre_red" placeholder="Ingrese el nombre de la red." required="required">
+                    </div>
+                </div>         
+
+                
+
+              </div>
+
+              <div class="row">
+                <!-- tipo_cifrado -->
+                <div class="col-md-4"> 
+                    <div class="form-group">
+                      <label for="tipo_cifrado">Tipo de cifrado</label>
+                      <input type="text" th:field="*{tipo_cifrado}" class="form-control" id="tipo_cifrado" name="tipo_cifrado" placeholder="Wifi, WEP, WPA, WPA2.." required="required">
+                    </div> 
+                </div>
+                  <!-- usuario -->
+                  <div class="col-md-4"> 
+                    <div class="form-group">
+                      <label for="usuario">Usuario</label>
+                      <input type="text" th:field="*{usuario}" class="form-control" id="usuario" name="usuario" placeholder="Ingrese un usuario" required="required">
+                    </div> 
+                </div>
+                  <!-- contrasenia_conexion -->
+                  <div class="col-md-4"> 
+                    <div class="form-group">
+                      <label for="contrasenia_conexion">Contraseña</label>
+                      <input type="text" class="form-control" th:field="*{contrasenia_conexion}"  id="contrasenia_conexion" name="contrasenia_conexion" placeholder="Ingrese contraseña" required="required">
+                    </div> 
+                </div>
+              </div>              
+
+
+              <button type="submit" class="btn btn-primary">Guardar</button>  
+              <a type="submit" class="btn btn-danger" th:href="@{/conexionRedController/vista}">Cancelar</a> 
+            </form>
+
+
+          </div>
+        </div>
+      </div> 
+
+    </main>
+
+    <script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+
+  </body>
+</html>

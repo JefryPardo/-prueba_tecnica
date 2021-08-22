@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  
+  <head th:insert="fragments/head :: head"></head>
+
+  <body>
+    <header th:insert="fragments/navbar :: menu-principal"></header>
+
+    <main role="main">
+
+        <div class="container">
+          <br><br>            
+            <hr>            
+              <h2 class="font-weight-bold text-center ">Conexiones de red</h2>
+              <a type="button" class="btn btn-primary" th:href="@{/conexionRedController/create}">Crear nueva red de conexion.</a>
+              <div th:if="${msg != null}" class='alert alert-success' style="margin-top: 5px;" th:text="${msg}" role='alert'></div>
+            <hr>
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Tipo</th>
+                    <th scope="col">Nombre de la red</th>
+                    <th scope="col">Cifrado</th>
+                    <th scope="col">Usuario</th>
+                    <th scope="col">Funciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    <div class="row" th:each="con: ${conexionesRed}">
+                        <tr>
+                            <th><h5 th:text="${con.id}"></h5></th>                            
+                            <td><h5 th:text="${con.tipo}"></h5></td>
+                            <td><h5 th:text="${con.nombre_red}"></h5></td>
+                            <td><h5 th:text="${con.tipo_cifrado}"></h5></td>                            
+                            <td><h5 th:text="${con.usuario}"></h5></td>
+
+                            <td>
+                              <a class="posts-delete btn btn-primary" th:href="@{/historicoRed/view/{id} (id=${con.id}) }"  title="Historial asignaciones de la red">
+                                <i class="fas fa-history "></i>
+                              </a>
+                              <a class="posts-delete btn btn-success" th:href="@{/conexionRedController/edit/{id} (id=${con.id}) }" title="Editar conexion red">
+                                <i class="fas fa-edit "></i>
+                              </a>
+                              <a class="posts-delete btn btn-danger" th:href="@{/conexionRedController/delete/{id} (id=${con.id}) }" title="Eliminar conexion red">
+                                <i class="far fa-trash-alt "></i>
+                              </a>
+                            </td>
+                            
+                        </tr>
+                    </div>
+                </tbody>
+            </table>
+            
+            
+        </div>
+
+    </main>    
+
+
+    <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script> -->
+    <script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+
+    
+  </body>
+</html>

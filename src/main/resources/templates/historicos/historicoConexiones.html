@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  
+  <head th:insert="fragments/head :: head"></head>
+
+  <body>
+    <header th:insert="fragments/navbar :: menu-principal"></header>
+
+    <main role="main">
+
+        <div class="container">
+          <br><br>            
+            <hr>            
+              <h2 class="font-weight-bold text-center ">Historial del dispositivo</h2>
+            <hr>
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Tipo</th>
+                    <th scope="col">Nombre red</th>
+                    <th scope="col">Tipo cifrado</th>
+                    <th scope="col">Usuario</th>
+                    <th scope="col">Mac</th>
+                    <th scope="col">Ip</th>
+                    <th scope="col">Tipo de dispositivo</th>
+                    <th scope="col">Fecha creacion</th>
+                    <th scope="col">Motivo</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    <div class="row" th:each="hisDis: ${historicoConexion}">
+                        <tr>
+                            <th><h5 th:text="${hisDis.id}"></h5></th>                            
+                            <td><h5 th:text="${hisDis.mac}"></h5></td>
+                            <td><h5 th:text="${hisDis.tipo}"></h5></td>
+                            <td><h5 th:text="${hisDis.nombre_red}"></h5></td>
+                            <td><h5 th:text="${hisDis.fecha_creacion}"></h5></td>
+                            <td><h5 th:text="${hisDis.ip}"></h5></td>     
+                            <td><h5 th:text="${hisDis.tipo_cifrado}"></h5></td>                                                     
+                            <td><h5 th:text="${hisDis.usuario}"></h5></td>
+                            <td><h5 th:text="${hisDis.fecha_creacion}"></h5></td>
+                            <td><h5 th:text="${hisDis.motivo}"></h5></td>
+                        </tr>
+                    </div>
+                </tbody>
+            </table>
+            
+            
+        </div>
+
+    </main>    
+
+
+    <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script> -->
+    <script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+
+    
+  </body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  
+  <head th:insert="fragments/head :: head"></head>
+
+  <body>
+    <header th:insert="fragments/navbar :: menu-principal"></header>
+
+    <main role="main">
+
+        <div class="container">
+          <br><br>            
+            <hr>            
+              <h2 class="font-weight-bold text-center ">Dispositivo electronico </h2>
+              <a type="button" class="btn btn-primary" th:href="@{/create}">Crear nuevo dispositivo.</a>
+              <div th:if="${msg != null}" class='alert alert-success' style="margin-top: 5px;" th:text="${msg}" role='alert'></div>
+            <hr>
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">MAC</th>
+                    <th scope="col">Tipo</th>
+                    <th scope="col">Estado de conexion</th>
+                    <th scope="col">Conexion de red</th>
+                    <th scope="col">Ip</th>
+                    <th scope="col">Funciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    <div class="row" th:each="dis: ${dispositivos}">
+                        <tr>
+                            <th><h5 th:text="${dis.id}"></h5></th>                            
+                            <td><h5 th:text="${dis.mac}"></h5></td>
+                            <td><h5 th:text="${dis.tipo}"></h5></td>
+                            <td><h5 th:text="${dis.estado_conexion}"></h5></td>
+                            <td><h5 th:text="${dis.conexion.nombre_red}"></h5></td>
+                            <td><h5 th:text="${dis.ip}"></h5></td>
+
+                            <td>
+                              <a class="posts-delete btn btn-primary" th:href="@{/historicoDispositivo/view/{mac_id} (mac_id=${dis.mac}) }" title="Historial del dispositivo">
+                                <i class="fas fa-history "></i>
+                              </a>
+                              <a class="posts-delete btn btn-success" th:href="@{/edit/{id} (id=${dis.id}) }" title="Editar dispositivo">
+                                <i class="fas fa-edit "></i>
+                              </a>
+                              <a class="posts-delete btn btn-danger" th:href="@{/delete/{id} (id=${dis.id}) }" title="Eliminar dispositivo">
+                                <i class="far fa-trash-alt "></i>
+                              </a>
+                            </td>
+                            
+                        </tr>
+                    </div>
+                </tbody>
+            </table>
+            
+            
+        </div>
+
+    </main>    
+
+
+    <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script> -->
+    <script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+
+    
+  </body>
+</html>

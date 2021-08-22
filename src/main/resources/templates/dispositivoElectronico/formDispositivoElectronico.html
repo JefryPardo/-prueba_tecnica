@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  
+  <head th:insert="fragments/head :: head"></head>
+
+  <body>
+    <header th:insert="fragments/navbar :: menu-principal"></header>
+
+    <main role="main">     
+      <hr>
+      <div class="container"> 
+        <br><br>
+        <div th:if="${msg != null}" class='alert alert-danger' style="margin-top: 5px;" th:text="${msg}" role='alert'></div>
+        <div class="card">
+          <h4 class="card-header"><strong>Creacion de dispositivo electronico</strong></h4> 
+          
+          <div class="card-body">
+            
+            <!-- Formulario -->
+            <form th:action="@{/save}" method="post" th:object="${dipositivo}" enctype="multipart/form-data">    
+              
+              <div th:if="${#fields.hasErrors('*')}" class='alert alert-danger' role='alert'>
+                Por favor corrija los siguientes errores:
+                <ul>
+                    <li th:each="err : ${#fields.errors('*')}" th:text="${err}" />
+                </ul>
+				      </div> 
+
+
+              <input type="hidden" th:field="*{id}">  
+              <div class="row">
+
+                <!-- mac -->
+                <div class="col-md-3"> 
+                    <div class="form-group">
+                      <label for="mac">Mac</label>
+                      <input th:if = "${id == null}"  type="text" th:field="*{mac}" class="form-control" name="mac" id="mac" placeholder="Mac" required="required">
+					  <input th:unless = "${id == null}" type="hidden" th:field="*{mac}">                                            
+                    </div>
+                </div>
+                <!-- Tipo -->
+                <div class="col-md-6"> 
+                  <div class="form-group">
+                    <label for="tipo">Tipo</label>
+                    <input type="text" th:field="*{tipo}" class="form-control" id="tipo" name="tipo" placeholder="Tipo" required="required">
+                  </div>
+                </div>
+                <!-- Estado -->
+                <div class="col-md-3"> 
+                    <div class="form-group">
+                      <label for="estado_conexion">Estado de conexion</label>
+                      <select class="form-control" th:field="*{estado_conexion}" name="estado_conexion" id="estado_conexion">
+                          <option value="1">True</option>
+                          <option value="0">False</option>	
+                      </select>
+                    </div>
+                </div>
+
+              </div>
+              
+              <hr>
+              <!-- Conexiones -->
+              <div class="row">
+                <div class="col-md-3"> 
+                  <div class="form-group">
+                    <label for="conexion">Redes de conexion disponibles</label>
+                    <select class="form-control" th:field="*{conexion}"  name="conexion" id="conexion">
+                      <option th:each=" c : ${disponibles}" th:value="${c.id}" th:text="${c.nombre_red}"></option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <hr>
+
+              <div class="row">
+                <!-- Ip -->
+                <div class="col-md-4"> 
+                  <div class="form-group">
+                    <label for="ip">Ip</label>
+                    <input type="text" th:field="*{ip}" class="form-control" id="ip" name="ip" placeholder="ip.." required="required">
+                  </div> 
+                </div>
+              </div>
+
+
+              <button type="submit" class="btn btn-primary">Guardar</button>  
+              <a type="submit" class="btn btn-danger" th:href="@{/}">Cancelar</a> 
+            </form>
+
+
+          </div>
+        </div>
+      </div> 
+
+    </main>
+
+    <script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+
+  </body>
+</html>
